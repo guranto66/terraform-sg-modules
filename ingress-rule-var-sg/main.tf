@@ -14,6 +14,8 @@ resource "aws_security_group_rule" "rule" {
   from_port         = replace(each.value.port, "-", "") == each.value.port ? each.value.port : split("-", each.value.port)[0]
   to_port           = replace(each.value.port, "-", "") == each.value.port ? each.value.port : split("-", each.value.port)[1]
   protocol          = var.protocol
+  ipv6_cidr_blocks  = []
+  prefix_list_ids   = []
   cidr_blocks       = each.value.from.cidrs
   security_group_id = each.value.to
   description       = each.value.from.description
